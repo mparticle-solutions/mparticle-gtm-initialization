@@ -15,8 +15,8 @@ ___INFO___
   "securityGroups": [],
   "displayName": "mParticle - Initialization Template",
   "catagories": [
-    "MARKETING", 
-    "ANALYTICS", 
+    "MARKETING",
+    "ANALYTICS",
     "PERSONALIZATION"
   ],
   "brand": {
@@ -110,29 +110,30 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 // Enter your template code here.
 const log = require('logToConsole');
 const injectScript = require('injectScript');
-const setInWindow = require('setInWindow'); 
-const copyFromWindow = require('copyFromWindow'); 
-const callInWindow = require('callInWindow'); 
+const setInWindow = require('setInWindow');
+const copyFromWindow = require('copyFromWindow');
+const callInWindow = require('callInWindow');
 const queryPermission = require('queryPermission');
+const makeInteger = require('makeInteger');
 log('data =', data);
 
-const dataPlanObject = {}; 
+const dataPlanObject = {};
 
 if (data.planId && data.planVersion) {
-  dataPlanObject.planId = data.planId; 
-  dataPlanObject.planVersion = data.planVersion; 
-} 
+  dataPlanObject.planId = data.planId;
+  dataPlanObject.planVersion = makeInteger(data.planVersion); 
+}
 
 const mParticleObject = {
       config: {
           isDevelopmentMode: data.isDevelopment,
-          dataPlan: dataPlanObject, 
-          logLevel: data.logLevel == 'none' ? undefined : data.logLevel, 
+          dataPlan: dataPlanObject,
+          logLevel: data.logLevel == 'none' ? undefined : data.logLevel,
       },
   };
 
-log(mParticleObject); 
-setInWindow("mParticle", mParticleObject, true); 
+log(mParticleObject);
+setInWindow("mParticle", mParticleObject, true);
 
 //load the SDK
 (
@@ -154,7 +155,7 @@ setInWindow("mParticle", mParticleObject, true);
                     Cart: {}
                 };
                 mParticleObject.Identity = {};
-                mParticleObject.config = mParticleObject.config || {}; 
+                mParticleObject.config = mParticleObject.config || {};
                 mParticleObject.config.rq = [];
                 mParticleObject.config.snippetVersion = 2.2;
                 mParticleObject.ready = function (t) {
@@ -207,18 +208,18 @@ setInWindow("mParticle", mParticleObject, true);
                     };
                 }
                 //override existing window.mParticle
-                setInWindow("mParticle", mParticleObject, true); 
-              
+                setInWindow("mParticle", mParticleObject, true);
+
                 //build and inject the script tag
                 const scriptUrl = (
                     "https://jssdkcdns" + ".mparticle.com/js/v2/"  + t + "/mparticle.js");
-              
-              
+
+
                 const onSuccess = () => {
                   log('mParticle: Script loaded successfully.');
                   data.gtmOnSuccess();
                 };
-              
+
                 const onFailure = () => {
                   log('mParticle: Script load failed.');
                   data.gtmOnFailure();
@@ -231,7 +232,7 @@ setInWindow("mParticle", mParticleObject, true);
                   data.gtmOnFailure();
                 }
             }
-)(data.apiKey); 
+)(data.apiKey);
 
 
 
@@ -424,5 +425,3 @@ setup: "const log = require('logToConsole'); \n"
 ___NOTES___
 
 Created on 8/7/2023, 12:47:38 PM
-
-
