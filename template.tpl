@@ -96,7 +96,7 @@ ___TEMPLATE_PARAMETERS___
     "help": "Data Plan ID and Version allow you to select specific data plans to validate and control your data."
   },
   {
-    "type": "NUMBER",
+    "type": "TEXT",
     "name": "planVersion",
     "displayName": "Data Plan Version",
     "simpleValueType": true,
@@ -114,13 +114,14 @@ const setInWindow = require('setInWindow');
 const copyFromWindow = require('copyFromWindow'); 
 const callInWindow = require('callInWindow'); 
 const queryPermission = require('queryPermission');
+const makeNumber = require('makeNumber');
 log('data =', data);
 
 const dataPlanObject = {}; 
 
 if (data.planId && data.planVersion) {
   dataPlanObject.planId = data.planId; 
-  dataPlanObject.planVersion = data.planVersion; 
+  dataPlanObject.planVersion = makeNumber(data.planVersion); 
 } 
 
 const mParticleObject = {
