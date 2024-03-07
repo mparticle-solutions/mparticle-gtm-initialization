@@ -96,7 +96,7 @@ ___TEMPLATE_PARAMETERS___
     "help": "Data Plan ID and Version allow you to select specific data plans to validate and control your data."
   },
   {
-    "type": "TEXT",
+    "type": "NUMBER",
     "name": "planVersion",
     "displayName": "Data Plan Version",
     "simpleValueType": true,
